@@ -24,7 +24,7 @@ Changelog :
 28/06/2013 : 
  - Gestion des thèmes selectionnable via les paquets
  - Prise en charge des wikis sans wakka.infos.php
- - Ignore les wikis dans wakka.config.php
+ - Ignore les wikis sans wakka.config.php
  - Correction bug dans le calcul des espaces disque de chaque wiki
 
 06/05/2013 : 
