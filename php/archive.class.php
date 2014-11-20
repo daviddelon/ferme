@@ -24,7 +24,7 @@ class Archive{
 			0,									//seconde	
 			intval(substr($str_date, 4, 2)), 	//Mois
 			intval(substr($str_date, 6, 2)), 	//Jour
-			intval(substr($str_date, 0, 4)) 	//Année
+			intval(substr($str_date, 0, 4)) 	//Ann&eacute;e
 		);
 		$tab_infos['url']  = '../admin/archives/'.$this->filename;
 
@@ -40,37 +40,37 @@ class Archive{
 		$name = substr($this->filename, 0 , -16);
 		$path = "../wikis/".$name;
 		
-		//Vérifier si le wiki n'est pas déjà existant
+		//V&eacute;rifier si le wiki n'est pas d&eacute;j&agrave; existant
 		if(file_exists($path)){
-			throw new Exception("Le wiki existe déjà.", 1);
+			throw new Exception("Le wiki existe d&eacute;j&agrave;.", 1);
 			exit();
 		}
 
-		//Décompresser les données
+		//D&eacute;compresser les donn&eacute;es
 		$output = shell_exec("mkdir tmp/".$name);
 		if(!is_dir("tmp/".$name)) {
-			throw new Exception("Impossible de créer le repertoire temporaire"
-						  ." (Vérifiez les droits d'acces sur admin/tmp)", 1);
+			throw new Exception("Impossible de cr&eacute;er le repertoire temporaire"
+						  ." (V&eacute;rifiez les droits d'acces sur admin/tmp)", 1);
 			exit();
 		}
 
 		$output = shell_exec("cd tmp && tar -xvzf ../archives/"
 							.$this->filename." && cd -");
 		if(!is_dir("tmp/".$name)) {
-			throw new Exception("Impossible d'extraire l'archive (Vérifiez "
+			throw new Exception("Impossible d'extraire l'archive (V&eacute;rifiez "
 								."les droits d'acces sur admin/tmp) ", 1);
 			exit();
 		}
 
-		//déplacer les fichiers
+		//d&eacute;placer les fichiers
 		$output = shell_exec("mv tmp/".$name."/".$name." ../wikis/");
 		if(!is_dir("../wikis/".$name)) {
 			throw new Exception("Impossible de replacer les fichiers du wiki "
-							."(Vérifiez les droits d'acces sur wikis/) ", 1);
+							."(V&eacute;rifiez les droits d'acces sur wikis/) ", 1);
 			exit();
 		}
 
-		//restaurer la base de donnée
+		//restaurer la base de donn&eacute;e
 		include("../wikis/".$name."/wakka.config.php");
 
 		$output = shell_exec("cat tmp/".$name."/".$name.".sql | "
@@ -84,7 +84,7 @@ class Archive{
 		$output = shell_exec("rm -r tmp/".$name);
 		if(is_dir("tmp/".$name)) {
 			throw new Exception("Impossible de supprimer les fichiers "
-							."temporaires. Prévenez l'administrateur.", 1);
+							."temporaires. Pr&eacute;venez l'administrateur.", 1);
 			exit();
 		}
 
@@ -113,4 +113,3 @@ class Archive{
 	}
 }
 ?>
-

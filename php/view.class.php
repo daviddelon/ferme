@@ -80,7 +80,7 @@ class View{
 	}
 
 	/************************************************************************
-	 * HASH-CASH : Charge le JavaScript qui génére la clé.
+	 * HASH-CASH : Charge le JavaScript qui genere la cle.
 	 ***********************************************************************/
 	private function HashCash(){	
 		//TODO : Rendre ce code "portable"
@@ -102,7 +102,7 @@ class View{
 				include("themes/".$this->theme."/squelette/".$template);
 			}
 		}
-		unset($_SESSION['alerts']); //pour éviter qu'elle ne s'accumulent.
+		unset($_SESSION['alerts']); //pour eviter qu'elle ne s'accumulent.
 	}
 
 	/************************************************************************
@@ -123,7 +123,7 @@ class View{
 	/***********************************************************************
 	 * Envois un email de confirmation
 	 **********************************************************************/
-	//TODO : ne valider l'envois que si le paramêtre mail est a 1 dans la 
+	//TODO : ne valider l'envois que si le param�tre mail est a 1 dans la 
 	// configuration.
 	function sendConfirmationMail($mail, $wikiName){
 
@@ -152,7 +152,7 @@ class View{
 	/***********************************************************************
 	 * Liste des fichiers dans un repertoire
 	 **********************************************************************/
-	//TODO : Filtrer les résultat par extension
+	//TODO : Filtrer les resultat par extension
 	private function getFiles($path){
 		$file_array = array();
 		if ($handle = opendir($path)) {

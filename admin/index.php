@@ -9,10 +9,10 @@ $ferme = new Ferme("../ferme.config.php");
 $view  = new View($ferme);
 
 //Pour éviter les problèmes de chemin : 
-$ferme->config['ferme_path'] = "../wikis/";
+$ferme->config['ferme_path'] = "../";
 $ferme->config['admin_path'] = "archives/";
 
-$ferme->refresh();
+$ferme->refresh(false); // pas de calcul de taille
 $ferme->refreshArchives();
 
 if(isset($_GET['action'])){

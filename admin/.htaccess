@@ -1,1 +1,7 @@
-
+AuthUserFile /home/coopgroup/www/admin/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Admin"
+AuthType Basic
+<Limit GET POST>
+require valid-user
+</Limit>

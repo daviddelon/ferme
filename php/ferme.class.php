@@ -36,13 +36,15 @@ class Ferme {
 				if ($entry != "." && $entry != ".." 
 								  && is_dir($entry_path)){
 					
-					try {$this->wikis[$entry] = new Wiki($entry_path, $calsize);} 
+					try {
+						$this->wikis[$entry] = new Wiki($entry_path, $calsize);
+					} 
 					catch (Exception $e) { }//TODO : send mail to admin 
 				}
 			}
 			closedir($handle);
 		} else
-			throw new Exception("Impossible d'accéder à "
+			throw new Exception("Impossible d'acc&eacute;der &agrave; "
 								.$ferme_path, 1);
 		
 	}
@@ -65,7 +67,7 @@ class Ferme {
 			}
 			closedir($handle);
 		} else
-			throw new Exception("Impossible d'accéder à "
+			throw new Exception("Impossible d'acc&eacute;der &agrave; "
 								.$archives_path, 1);
 		
 	}
@@ -169,7 +171,7 @@ class Ferme {
 	 * Clean unwanted characters
 	 ******************************************************************/
 	private function cleanEntry($entry){
-		//TODO : éliminer les caractère indésirables
+		//TODO : eliminer les caractere indesirables
 		return htmlentities($entry, ENT_QUOTES, "UTF-8");
 	}
 	
@@ -183,6 +185,8 @@ class Ferme {
 		return true;
 	}
 
+
+
 	/*******************************************************************
 	 * Wiki installation
 	 * ****************************************************************/
@@ -194,12 +198,12 @@ class Ferme {
 		require_once('php/secret/wp-hashcash.lib');
 			if(!isset($_POST["hashcash_value"]) 
 				|| $_POST["hashcash_value"] != hashcash_field_value()) {
-				throw new Exception("La plantation de wiki est une activité 
-					délicate qui ne doit pas être effectuée par un robot. 
-					(Pensez à activer JavaScript)", 1);
+				throw new Exception("La plantation de wiki est une activit&eacute; 
+					d&eacute;licate qui ne doit pas &ecirc;tre effectu&eacute;e par un robot. 
+					(Pensez &agrave; activer JavaScript)", 1);
 			}
 
-		//Une série de tests sur les données.
+		//Une serie de tests sur les donnees.
 		if($this->isValidWikiName($wikiName)){
 			throw new Exception("Ce nom wiki n'est pas valide.", 1);
 			exit();
@@ -219,15 +223,13 @@ class Ferme {
 		$package_path = "packages/".$this->config['source']."/";
 
 
-		//Vérifie si le wiki n'existe pas déjà
+		//Verifie si le wiki n'existe pas deja
 		if (is_dir($wiki_path) || is_file($wiki_path)) {
-			throw new Exception("Ce nom de wiki est déjà utilisé", 1);
+			throw new Exception("Ce nom de wiki est d&eacute;j&agrave; utilis&eacute;", 1);
 			exit();
 		}
 
-		$output = shell_exec("cp -r --preserve=mode,ownership "
-			.$package_path."files"
-			." ".$wiki_path);
+		$output = shell_exec("cp -r --preserve=mode,ownership " .$package_path."files" ." ".$wiki_path);
 		
 
 		/*********************************************************************
@@ -237,14 +239,14 @@ class Ferme {
 
 		
 		foreach ($config as $file => $content) {
-			file_put_contents($wiki_path.$file, utf8_encode($content));
+			@file_put_contents($wiki_path.$file, utf8_encode($content));
 		}
 		/*********************************************************************
 		 * FIN BOUCLE
 		 ********************************************************************/
 
 
-		//Création de la base de donnée
+		//Creation de la base de donne
 		$dblink = mysql_connect($this->config['db_host'], 
 								$this->config['db_user'], 
 								$this->config['db_password']);
@@ -257,7 +259,7 @@ class Ferme {
 		foreach($listQuery as $query){
 			$result = mysql_query($query, $dblink);
 			if (!$result) {
-				die('Requête invalide : ' . mysql_error());
+				die('Requ&ecirc;te invalide : ' . mysql_error());
 			}
 		}
 		mysql_close($dblink);
